@@ -10,8 +10,9 @@ app.use(
 );
 
 io.on('connection', (socket) => {
-	console.log('New Socket Created : ' + socket.id);
-	socket.emit('Connected');
+	socket.on('draw', (data) => {
+		socket.broadcast.emit('draw', data);
+	});
 });
 
 const port = 3291 || process.env.PORT;
